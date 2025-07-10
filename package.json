@@ -1,15 +1,25 @@
 {
-  "name": "clueless-interations",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "clueless-interactions",
+  "version": "1.0.7",
+  "description": "This is an interactions tracker to track things like button presses and other interactions with your app.",
+  "main": "dist/interaction-tracker.js",
+  "prisma": {
+    "schema": "prisma/schema.prisma"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "scripts": {
+    "prisma:generate": "prisma generate",
+    "build": "prisma generate && tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "interactions",
+    "tracker",
+    "analytics",
+    "typescript"
+  ],
+  "author": "bcuff",
+  "license": "MIT",
+  "type": "module",
   "devDependencies": {
     "@types/node": "^24.0.12",
     "ts-node": "^10.9.2",
@@ -18,5 +28,6 @@
   "dependencies": {
     "@prisma/client": "^6.11.1",
     "prisma": "^6.11.1"
-  }
+  },
+  "types": "dist/types/interaction-tracker.d.ts"
 }

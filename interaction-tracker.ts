@@ -1,16 +1,9 @@
-import { Event, Prisma, PrismaClient } from "@prisma/client";
-import { execSync } from "child_process";
+import { Event, Prisma, PrismaClient } from "./generated/client/index.js";
 
 export class CluelessInteractionTrackerClient {
   private prisma: PrismaClient;
-  
-  constructor(dbUrl: string) {
-    process.env.DATABASE_URL = dbUrl;
-    const prismaPath: string = "./prisma/schema.prisma";
-    execSync(`npx prisma migrate deploy --schema=${prismaPath}`, {
-      stdio: "ignore",
-    });
 
+  constructor(dbUrl: string) {
     this.prisma = new PrismaClient({
       datasources: {
         db: { url: dbUrl },
