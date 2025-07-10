@@ -6,8 +6,10 @@ export declare class CluelessInteractionTrackerClient {
     createContextIndex(field: string): Promise<void>;
     queryEvents(filters?: {
         event?: string;
-        contextField?: string;
-        contextValue?: any;
+        context?: {
+            contextField?: string;
+            contextValue?: any;
+        }[];
     }, options?: {
         order?: "asc" | "desc";
         limit?: number;

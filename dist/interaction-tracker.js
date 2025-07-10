@@ -25,11 +25,15 @@ export class CluelessInteractionTrackerClient {
         if (filters.event) {
             where.event = filters.event;
         }
-        if (filters.contextField && filters.contextValue !== undefined) {
-            where.context = {
-                path: [filters.contextField],
-                equals: filters.contextValue,
-            };
+        if (filters.context &&
+            Array.isArray(filters.context) &&
+            filters.context.length > 0) {
+            where.AND = filters.context.map((c) => ({
+                context: {
+                    path: [c.contextField],
+                    equals: c.contextValue,
+                },
+            }));
         }
         return this.prisma.event.findMany({
             where,
