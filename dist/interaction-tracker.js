@@ -34,8 +34,17 @@ export class CluelessInteractionTrackerClient {
             Array.isArray(filters.context) &&
             filters.context.length > 0) {
             where.AND = filters.context.map((c) => ({
-                context: Object.assign({ path: c.contextField ? [c.contextField] : undefined }, (c.operation ? Object.assign({}, c.operation) : { equals: c.contextValue })),
+                context: Object.assign({ path: [c.contextField] }, (c.operation ? Object.assign({}, c.operation) : { equals: c.contextValue })),
             }));
+        }
+        if (filters.from || filters.to) {
+            where.timestamp = {};
+            if (filters.from) {
+                where.timestamp.gte = filters.from;
+            }
+            if (filters.to) {
+                where.timestamp.lte = filters.to;
+            }
         }
         return this.prisma.event.findMany({
             where,
