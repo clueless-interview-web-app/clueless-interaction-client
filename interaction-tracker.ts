@@ -27,15 +27,8 @@ export class CluelessInteractionTrackerClient {
   }
 
   async queryEvents(
-    filters: {
-      event?: string | string[];
-      context?: {
-        contextField?: string;
-        contextValue?: any;
-        operation?: Prisma.JsonFilter;
-      }[];
-    } = {},
-    options: { order?: "asc" | "desc"; limit?: number } = {}
+    filters: EventQueryFilters = {},
+    options: EventQueryOptions = {}
   ): Promise<Event[]> {
     const where: Prisma.EventWhereInput = {};
 
@@ -60,6 +53,16 @@ export class CluelessInteractionTrackerClient {
       }));
     }
 
+    if (filters.from || filters.to) {
+      where.timestamp = {};
+      if (filters.from) {
+        where.timestamp.gte = filters.from;
+      }
+      if (filters.to) {
+        where.timestamp.lte = filters.to;
+      }
+    }
+
     return this.prisma.event.findMany({
       where,
       orderBy: {
@@ -69,3 +72,16 @@ export class CluelessInteractionTrackerClient {
     });
   }
 }
+
+type EventQueryFilters = {
+  event?: string | string[];
+  to?: Date;
+  from?: Date;
+  context?: {
+    contextField?: string;
+    contextValue?: any;
+    operation?: Prisma.JsonFilter;
+  }[];
+};
+
+type EventQueryOptions = { order?: "asc" | "desc"; limit?: number };
