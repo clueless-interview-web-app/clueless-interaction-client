@@ -1,6 +1,6 @@
 {
   "name": "clueless-interactions",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "This is an interactions tracker to track things like button presses and other interactions with your app.",
   "main": "dist/interaction-tracker.js",
   "prisma": {
@@ -29,5 +29,5 @@
     "@prisma/client": "^6.11.1",
     "prisma": "^6.11.1"
   },
-  "types": "dist/types/interaction-tracker.d.ts"
+  "types": "dist/interaction-tracker.d.ts"
 }
