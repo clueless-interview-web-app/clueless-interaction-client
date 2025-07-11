@@ -28,10 +28,11 @@ export class CluelessInteractionTrackerClient {
 
   async queryEvents(
     filters: {
-      event?: string;
+      event?: string | string[];
       context?: {
         contextField?: string;
         contextValue?: any;
+        operation?: Prisma.JsonFilter;
       }[];
     } = {},
     options: { order?: "asc" | "desc"; limit?: number } = {}
@@ -39,7 +40,11 @@ export class CluelessInteractionTrackerClient {
     const where: Prisma.EventWhereInput = {};
 
     if (filters.event) {
-      where.event = filters.event;
+      if (Array.isArray(filters.event)) {
+        where.event = { in: filters.event };
+      } else {
+        where.event = filters.event;
+      }
     }
 
     if (
@@ -50,7 +55,7 @@ export class CluelessInteractionTrackerClient {
       where.AND = filters.context.map((c) => ({
         context: {
           path: [c.contextField],
-          equals: c.contextValue,
+          ...(c.operation ? { ...c.operation } : { equals: c.contextValue }),
         },
       }));
     }
