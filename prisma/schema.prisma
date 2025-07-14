@@ -5,9 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../dist/generated/client"
-   binaryTargets =["native", "debian-openssl-3.0.x"]
+  provider      = "prisma-client-js"
+  output        = "../dist/generated/client"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 generator client2 {
@@ -25,6 +25,7 @@ model Event {
   event     String
   context   Json
   timestamp DateTime @default(now())
+
   @@index([timestamp])
   @@index([event])
 }
