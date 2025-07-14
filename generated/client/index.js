@@ -172,8 +172,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../dist/generated/client\"\n}\n\ngenerator client2 {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Event {\n  id        Int      @id @default(autoincrement())\n  event     String\n  context   Json\n  timestamp DateTime @default(now())\n\n  @@index([timestamp])\n  @@index([event])\n}\n",
-  "inlineSchemaHash": "2c2b5103c55febbc3373e9d57e68307b5a7a9868d6f124c542c12ca35d05722b",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../dist/generated/client\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ngenerator client2 {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Event {\n  id        Int      @id @default(autoincrement())\n  event     String\n  context   Json\n  timestamp DateTime @default(now())\n\n  @@index([timestamp])\n  @@index([event])\n}\n",
+  "inlineSchemaHash": "0b889630b65c65be5112dfc7b20e972c0a8b4559906dac1b700623135710774f",
   "copyEngine": true
 }
 
@@ -214,6 +214,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
 path.join(process.cwd(), "generated/client/libquery_engine-darwin-arm64.dylib.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "generated/client/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "generated/client/schema.prisma")
