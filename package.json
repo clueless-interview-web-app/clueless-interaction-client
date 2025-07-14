@@ -9,7 +9,7 @@
   "scripts": {
     "prisma:generate": "prisma generate",
     "build": "prisma generate && tsc",
-    "prepublishOnly": "npm run buld"
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "interactions",
