@@ -1,6 +1,6 @@
 {
   "name": "clueless-interactions",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "description": "This is an interactions tracker to track things like button presses and other interactions with your app.",
   "main": "dist/interaction-tracker.js",
   "prisma": {
@@ -9,7 +9,8 @@
   "scripts": {
     "prisma:generate": "prisma generate",
     "build": "prisma generate && tsc",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "postinstall": "prisma generate"
   },
   "keywords": [
     "interactions",
